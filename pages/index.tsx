@@ -43,7 +43,7 @@ export default function Home({
   const [createAccount, setCreateAccount] = useState(false);
   const [login, setLogin] = useState(false);
   const [correctRoom, setCorrectRoom] = useState('Introduction'); // Set a default room
-
+  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>({ isConnected: false });
   const handleCorrectEmail = (email: string) => {
     setCorrectEmail(email);
     setCreateAccount(false); // Assuming you want to switch to another section after email validation
@@ -93,7 +93,7 @@ export default function Home({
             <button className={styles.welcomeButton} onClick={() => {setCreateAccount(true); setWelcome(false); }}>Create Account</button>
           </div>
         )}
-        {createAccount && <CreateAccount />}
+        {createAccount && <CreateAccount isConnected={connectionStatus.isConnected} />}
         {login && <CheckEmail onCorrectEmail={handleCorrectEmail} />}
 
         {(!createAccount && !login && !welcome) && (
@@ -101,7 +101,7 @@ export default function Home({
             
             {/* <h1>Correct Room 2: {correctRoom}</h1> */}
             <Readmsgs onRoomChange={handleRoomChange} />
-            <Insertintomsgsdb correctEmail={correctEmail} correctRoom={correctRoom} />
+            <Insertintomsgsdb correctEmail={correctEmail} correctRoom={correctRoom} isConnected={connectionStatus.isConnected} />
           </>
         )}
       </main>

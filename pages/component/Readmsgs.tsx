@@ -5,8 +5,15 @@ interface ReadmsgsProps {
   onRoomChange: (selectedRoom: string) => void;
 }
 
+// Define the DocumentType interface
+interface DocumentType {
+  email: string;
+  message: string;
+  // other properties...
+}
+
 export default function Readmsgs({ onRoomChange }: ReadmsgsProps) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DocumentType[]>([]);
   const [room, setRoom] = useState('Introduction'); // Set a default room
 
   const fetchData = async () => {

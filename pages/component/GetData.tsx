@@ -1,9 +1,13 @@
-
-
 import React, { useState } from 'react';
 
+// Define the DocumentType interface
+interface DocumentType {
+  email: string;
+  // other properties...
+}
+
 export default function GetData() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DocumentType[]>([]); // Specify the type for the data state
 
   const fetchData = async () => {
     try {
@@ -12,7 +16,7 @@ export default function GetData() {
       });
 
       if (response.ok) {
-        const fetchedData = await response.json();
+        const fetchedData: DocumentType[] = await response.json(); // Specify the type for fetchedData
         setData(fetchedData);
       } else {
         console.error('Failed to fetch data');
@@ -31,13 +35,7 @@ export default function GetData() {
           <li key={index}>{`Email: ${document.email || 'N/A'}`}</li>
         ))}
       </ul>
-      <ul>
-        {data.map((document, index) => (
-          <li key={index}>{`Email 2: ${document.email || 'N/A'}`}</li>
-        ))}
-      </ul>
+      {/* You can continue using the DocumentType interface for other parts of your code */}
     </div>
   );
 }
-
-

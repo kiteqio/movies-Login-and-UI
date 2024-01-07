@@ -101,7 +101,6 @@ export default function Insertintomsgsdb({
           <input
             type="text"
             name="message"
-            pladceholder="send Message"
             value={formData.message}
             onChange={handleInputChange}
             className={styles.sendElement}
