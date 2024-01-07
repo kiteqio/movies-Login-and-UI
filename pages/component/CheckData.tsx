@@ -6,6 +6,13 @@ interface CheckEmailProps {
   onCorrectEmail: (email: string) => void;
 }
 
+// Define the DocumentType interface
+interface DocumentType {
+  email: string;
+  id: string;
+  // other properties...
+}
+
 export default function CheckEmail({ onCorrectEmail }: CheckEmailProps) {
   const [formData, setFormData] = useState({
     email: '',
@@ -32,9 +39,10 @@ export default function CheckEmail({ onCorrectEmail }: CheckEmailProps) {
         setData(fetchedData);
 
         // Check if the email exists in the fetched data
-        const emailExists = fetchedData.some(
-          (document) => document.email === formData.email && document.id === formData.id
-        );
+        // Your component code
+const emailExists = fetchedData.some((document: DocumentType) =>
+document.email === formData.email && document.id === formData.id
+);
 
         if (emailExists) {
           alert('Email and Id matched');
