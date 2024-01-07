@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    width: 100%;
 }
 
 
@@ -45,9 +45,10 @@
 .sendContainer {
        /* position: absolute; */
     /* bottom: -2000px; */
-    width: 360px;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
 }
 
 

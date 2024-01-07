@@ -75,10 +75,16 @@ export default function Home({
           background-color: #1e1f22;
         }
         * {
-          border: 2px solid purple;
+          // border: 2px solid purple;
           color: white;
           font-family: system-ui;
           font-weight: 100;
+        }
+
+        input {
+          color: #060606;
+          font-size: 20px;
+      
         }
       `}</style>
       <Head>

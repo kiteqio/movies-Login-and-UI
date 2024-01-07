@@ -42,8 +42,8 @@ export default function Readmsgs({ onRoomChange }: ReadmsgsProps) {
   return (
     <div className={styles.bodyContainer}>
       <div className={styles.menuContainer}>
-        <p className={styles.roomTitle} onClick={() => handleRoomChange('Introduction')}>Introduction</p>
-        <p className={styles.roomTitle} onClick={() => handleRoomChange('message')}>message</p>
+        <p className={styles.roomTitle} onClick={() => handleRoomChange('Introduction')}>#Introduction</p>
+        <p className={styles.roomTitle} onClick={() => handleRoomChange('message')}>#Message</p>
       </div>
       {/* <button onClick={fetchData}>Get Messages</button> */}
 
