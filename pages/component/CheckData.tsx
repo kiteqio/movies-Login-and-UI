@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
 
-export default function CheckEmail() {
+
+import React, { useState } from 'react';
+import styles from './CheckData.module.css';
+interface CheckEmailProps {
+  onCorrectEmail: (email: string) => void;
+}
+
+export default function CheckEmail({ onCorrectEmail }: CheckEmailProps) {
   const [formData, setFormData] = useState({
     email: '',
     id: ''
   });
   const [data, setData] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -30,7 +37,9 @@ export default function CheckEmail() {
         );
 
         if (emailExists) {
-          alert('Email exists combined with id');
+          alert('Email and Id matched');
+          setToggle(true);
+          onCorrectEmail(formData.email); // Send correct email to parent
         } else {
           alert('Email does not exist');
         }
@@ -45,14 +54,14 @@ export default function CheckEmail() {
   return (
     <div>
       <h2>Fetched Data:</h2>
-      <button onClick={fetchData}>Check Email and Id</button>
-     
-      <form className="Form" onSubmit={(event) => event.preventDefault()}>
+      
+      <form className={styles.Form} onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
+          className={styles.StyleInput}
         />
 
         <input
@@ -60,8 +69,11 @@ export default function CheckEmail() {
           name="id"
           value={formData.id}
           onChange={handleInputChange}
+          className={styles.StyleInput}
         />
+        <button className={styles.SignupButton} onClick={fetchData}>Login</button>
       </form>
+      
     </div>
   );
 }

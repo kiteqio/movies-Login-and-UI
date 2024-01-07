@@ -2,6 +2,8 @@ import Head from 'next/head'
 import { useState } from 'react';
 import clientPromise from '../../lib/mongodb';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import styles from './Insertintomsgsdb.module.css';
+
 
 type ConnectionStatus = {
   isConnected: boolean
@@ -24,14 +26,20 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
+interface InsertintomsgsdbProps {
+  correctEmail: string;
+  correctRoom: string;
+  isConnected: boolean;
+}
 export default function Insertintomsgsdb({
+  correctEmail,
+  correctRoom,
   isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-   
+}: InsertintomsgsdbProps) {
   const [formData, setFormData] = useState({
-    email: '',
+    email: correctEmail,
     message: '',
-    room: 'message'
+    room: correctRoom
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,21 +48,28 @@ export default function Insertintomsgsdb({
       [e.target.name]: e.target.value,
     });
   };
-
+  
   const formSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     try {
+      const dataToSend = {
+        email: correctEmail,
+        message: formData.message,
+        room: correctRoom
+      };
+  
       const response = await fetch('../api/insertmsgapi', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSend),
       });
-
+  
       if (response.ok) {
         console.log('Data inserted successfully');
+        console.log(dataToSend);
       } else {
         console.error('Failed to insert data');
       }
@@ -62,34 +77,40 @@ export default function Insertintomsgsdb({
       console.error('Error inserting data:', error);
     }
   };
-
-
   
   return (
-    <div className="container">
-     
-      <form className="Form" onSubmit={(event) => formSubmit(event)}>
-         <input
-              type="text"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-         <input
-              type="text"
-              name="message"
-              value={formData.message}
-              onChange={handleInputChange}
-            />
-           <select onChange={handleInputChange} name="room">
-            <option value="message">message</option>
-            <option value="Introduction">Introduction</option>
-           </select>
-
-          
-        <input type="submit" value="Insert" />
+    <div className={styles.FormsendContainer}>
+      <form className={styles.formsend} onSubmit={(event) => formSubmit(event)}>
+        <div className={styles.RoomsContainer}>
+          <input
+            type="text"
+            name="room"
+            value={correctRoom}
+            readOnly // Make it read-only to prevent user input
+            className={styles.inputemail}
+          />
+        </div>
+        <input
+          type="text"
+          name="email"
+          value={correctEmail}
+          readOnly // Make it read-only to prevent user input
+          className={styles.inputemail}
+        />
+        <div className={styles.sendContainer}>
+          <input
+            type="text"
+            name="message"
+            pladceholder="send Message"
+            value={formData.message}
+            onChange={handleInputChange}
+            className={styles.sendElement}
+          />
+          {/* <p>correct {correctRoom} </p> */}
+          <input className={styles.sendButton} type="submit" value=">" />
+        </div>
       </form>
-
     </div>
-  )
+  );
+  
 }

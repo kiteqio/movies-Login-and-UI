@@ -1,49 +1,11 @@
-
-
-// import React, { useState } from 'react';
-
-// export default function Readmsgs() {
-//   const [data, setData] = useState([]);
-
-//   const fetchData = async () => {
-//     try {
-//       const response = await fetch('../api/insertmsgapi', {
-//         method: 'GET',
-//       });
-
-//       if (response.ok) {
-//         const fetchedData = await response.json();
-//         setData(fetchedData);
-//       } else {
-//         console.error('Failed to fetch data');
-//       }
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Fetched Data:</h2>
-//       <button onClick={fetchData}>Get Messages</button>
-//       <ul>
-//         {data.map((document, index) => (
-//           <li key={index}>{`Email: ${document.email || 'N/A'}`}</li>
-//         ))}
-//       </ul>
-//       <ul>
-//         {data.map((document, index) => (
-//           <li key={index}>{`Message: ${document.message || 'N/A'}`}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-
 import React, { useState } from 'react';
+import styles from './Readmsgs.module.css';
 
-export default function Readmsgs() {
+interface ReadmsgsProps {
+  onRoomChange: (selectedRoom: string) => void;
+}
+
+export default function Readmsgs({ onRoomChange }: ReadmsgsProps) {
   const [data, setData] = useState([]);
   const [room, setRoom] = useState('Introduction'); // Set a default room
 
@@ -64,28 +26,35 @@ export default function Readmsgs() {
     }
   };
 
+  const handleRoomChange = (selectedRoom: string) => {
+    setRoom(selectedRoom);
+    fetchData();
+    onRoomChange(selectedRoom);
+  };
+
   return (
-    <div>
-      <h2>Fetched Data:</h2>
-      <label>
-        Select Room:
-        <select value={room} onChange={(e) => setRoom(e.target.value)}>
-          <option value="message">message</option>
-          <option value="Introduction">Introduction</option>
-          {/* Add more room options as needed */}
-        </select>
-      </label>
-      <button onClick={fetchData}>Get Messages</button>
-      <ul>
+    <div className={styles.bodyContainer}>
+      <div className={styles.menuContainer}>
+        <p className={styles.roomTitle} onClick={() => handleRoomChange('Introduction')}>Introduction</p>
+        <p className={styles.roomTitle} onClick={() => handleRoomChange('message')}>message</p>
+      </div>
+      {/* <button onClick={fetchData}>Get Messages</button> */}
+
+      <div className={styles.parentMessages}>
         {data.map((document, index) => (
-          <li key={index}>{`Email: ${document.email || 'N/A'}`}</li>
+          <div className={styles.messageparentContainer} key={index}>
+            <div className={styles.profileContainer}>
+              <div className={styles.profilePic}></div>
+            </div>
+            <div className={styles.messageContainer}>
+              <div className={styles.messageview} >
+            <div className={styles.email}>{` ${document.email || 'N/A'}`}</div>
+              <div className={styles.message}>{`${document.message || 'N/A'}`}</div>
+            </div>
+            </div>
+          </div>
         ))}
-      </ul>
-      <ul>
-        {data.map((document, index) => (
-          <li key={index}>{`Message: ${document.message || 'N/A'}`}</li>
-        ))}
-      </ul>
+      </div>
     </div>
   );
 }

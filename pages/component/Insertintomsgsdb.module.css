@@ -1,0 +1,61 @@
+.FormsendContainer {
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0px;
+    width: 75%;
+    /* border: 2px solid red; */
+    right: 0;
+}
+
+
+.formsend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+.inputemail {
+  display: none;
+}
+
+
+.sendElement {
+    width: 80%;
+    height: 42px;
+    border: none;
+    background-color: #b7b7b752;
+    border-radius: 9px;
+}
+
+.RoomsContainer {
+    height: 3vh;
+    left: 0;
+    top: 210vh;
+    width: 113px;
+    display: none;
+}
+
+.sendContainer {
+       /* position: absolute; */
+    /* bottom: -2000px; */
+    width: 360px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.sendButton {
+    background: none;
+    color: white;
+    width: 16%;
+    font-size: 42px;
+    font-family: monospace;
+    border: none;
+}

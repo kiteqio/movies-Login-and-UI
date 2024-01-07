@@ -25,7 +25,7 @@ export default function GetData() {
   return (
     <div>
       <h2>Fetched Data:</h2>
-      <button onClick={fetchData}>Get Data</button>
+      <button onClick={fetchData}>Show User Information</button>
       <ul>
         {data.map((document, index) => (
           <li key={index}>{`Email: ${document.email || 'N/A'}`}</li>

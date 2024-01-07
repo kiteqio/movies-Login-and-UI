@@ -1,0 +1,27 @@
+ .Form {
+   border: 2px solid purple;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .SignupInput {
+   height: 64px;
+    width: 266.3px;
+    margin: 13px 0px;
+    border-radius: 46px;
+    border: none;
+ }
+
+ .SignupButton {
+   border: none;
+   background: none;
+   color: white;
+   font-size: 27px;
+   margin-top: 12px;
+ }
+
+
+ /* .input */

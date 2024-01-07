@@ -1,0 +1,31 @@
+.MainContainer {
+    /* border: 2px solid purple; */
+    height: 96vh;
+ }
+ .container {
+    margin: 0;
+    /* Add any other global styles you want for the body here */
+  }
+
+  .welcomePage {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   height: 100vh;
+  }
+
+  .welcomeButton {
+      width: 211px;
+      height: 51px;
+      border-radius: 42px;
+      margin: 23px;
+      border: none;
+      background: none;
+      border: 1px solid;
+      font-size: x-large;
+      font-family: system-ui;
+      font-weight: 100;
+  }
+  
